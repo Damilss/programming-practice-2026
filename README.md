@@ -35,7 +35,7 @@ Everything is currently written in **Java**. I'm planning to add **C** and **C++
 
 ## Why
 
-The point isn't to collect green checkmarks. It's to get better at recognizing patterns, writing clean code under constraints, and being able to explain *why* a solution works — which is why each problem gets written-up notes and not just a code dump.
+It's to get better at recognizing patterns, writing clean code under constraints, and being able to explain *why* a solution works, which is why each problem gets written-up notes and not just a code dump.
 
 ## License
 
