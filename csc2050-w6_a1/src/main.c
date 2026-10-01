@@ -89,6 +89,12 @@ int main (int argc, char* argv[]){
 	printf("\nThe difference is: %d", diff(x,y));
 	printf("\nThe product is: %d", prod(x, y));
 	printf("\nThe remainder is: %d \n", rem(x, y));
+	
+	//free allocated memory	
+	free(x);
+	free(y);
+	x = NULL;
+	y = NULL;
 
 	return 0;
 }
