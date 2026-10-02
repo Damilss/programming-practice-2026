@@ -8,54 +8,152 @@
  * Author: Emilio Scott
  */
 
-typedef struct Employee {
-	char* name;
+/*
+ * typedef allows us to create a sort of alias over our struct employee and 
+ * so we don't have to continue to type out `struct Employee` every single time
+ * Essentially `struct Employee` = `empl`
+ */
+typedef struct{
+
+	// switched to const since pointing to string literals type `const char *names[]`
+	const char *name;
 	int salary;
-}Empl;
+}empl;
 
-double avrgSal(Empl* employee, int size);
+double avrgSal(empl *employee, int size);
+int minSal(empl *employee, int size);
+int maxSal(empl *employee, int size);
+void printEmployees(empl *employee, int size);
 
-int minSal(Empl* employee, int size);
+/*
+ * alternatively could use `#define SIZE 8` preprocessor directive.
+ * SIZE is used as the curent seeded count of employees
+ */
+enum { SIZE = 8 };
 
-int maxSal(Empl* employee, int size);
+/*
+ * main(), entry point of program
+ * @param: int argc argument count
+ * @param: char *argv[] argument variables
+ * @return int, exit status
+ */
+int main(int argc, char *argv[]){
 
-void printEmployees(Empl* employee, int size);
+	/*
+	 * These are the seed names,
+	 * Modern C treats string literals as read-only memory to be safe
+	 * even if the string literals arent' actually places within
+	 * read only memory by the compiler. It's important to not treat
+	 * string literals this way as modifing through like:
+	 *
+	 * names[0][0] = 'P'
+	 *
+	 */
+	const char *names[SIZE] = {
+		"Sam", "Jenice",
+		"Tom", "Jack",
+		"Ema", "Mario",
+		"Mona", "Charles"
+	};
 
 
-int main(int argc, char* argv[]){
-	
+	//update random seed	
 	srand(time(NULL));
-	Empl* employeedatabase = (Empl*)malloc(sizeof(Empl)*10);	
-	Empl* employee1 = (Empl*)malloc(sizeof(Empl));
-	Empl* employee2 = (Empl*)malloc(sizeof(Empl));
-	Empl* employee3 = (Empl*)malloc(sizeof(Empl));
-	Empl* employee4= (Empl*)malloc(sizeof(Empl));
 	
-	employee1->name = "Sam";
-	employee1->salary = rand() % 100001 + 100000;
-	employee2->name = "Jenice";
-	employee2->salary = rand() % 100001 + 100000;
-	employee3->name = "Tom";
-	employee3->salary = rand() % 100001 + 100000;
-	employee4->name  = "Jack";
-	employee4->salary = rand() % 100001 + 100000;
+	//init database
+	empl *employeedatabase = malloc(sizeof(empl)*10);	
+	
+	//seed employees
+	for(int i = 0; i <= SIZE; i++){
+		employeedatabase[i].salary = rand() % 100001 + 100000;
+		employeedatabase[i].name = names[i];
+	}		
+	
+	printf("The average salary is %0.2lf\n", avrgSal(employeedatabase, SIZE));
+	printf("The highest salary is %d\n", maxSal(employeedatabase, SIZE));
+	printf("The lowest salary is %d\n", minSal(employeedatabase, SIZE));
+	printf("\n");
+	printEmployees(employeedatabase, SIZE);
+	
+	// dealloc; Everything is relational to employeedatabse, so only one free needed
+	free(employeedatabase);
+	employeedatabase = NULL;
 
-	employeedatabase[0] = *employee1;
-	employeedatabase[1] = *employee2;
-	employeedatabase[2] = *employee3;
-	employeedatabase[3] = *employee4;
-	
-	printf("The average salary is %0.2lf\n", avrgSal(employeedatabase, 4));	
 	return 0;
 }
 
-double avrgSal(Empl* employee, int size){
+/*
+ * avrgSal() takes the all of the employees salaries within our declared
+ * employee databse and finds the average salary of all of them
+ * @param: empl* databse
+ * @param: int size
+ * @return: double, avergae of all of the salaries
+ */
+double avrgSal(empl *empldatabase, int size){
 
 	int sum = 0;
 	for ( int i = 0; i < size; i++ ){
-		sum = sum + (employee + i)->salary;
+		sum = sum + (empldatabase + i)->salary;
 	}
 
 	return (sum/size);
+}
+
+/*
+ * printEmployees() does exaclty that
+ * @param: empl *empldatabase, the employeedatabase goes here
+ * @param: int size, count of employees in database
+ * @return: void
+ */
+void printEmployees(empl *empldatabase, int size){
+	for(int i = 0; i < size; i++){
+		printf(
+		"%s -> $%d\n", empldatabase[i].name, empldatabase[i].salary
+		);
+	}
+}
+
+/*
+ * minSal() returns the minimum salary out of all of the employees within 
+ * the specified parammeter database
+ * @param: empl *empldatabase, the specific employee databse
+ * @param: int size, count of employees in database
+ * @return: int, returns the smallest salary out of all the employees
+ */
+int minSal(empl *empldatabase, int size){
+	int min;
+	for(int i = 0; i < size; i++){
+		if (i == 0){
+			min = empldatabase[i].salary;
+		} else if (empldatabase[i].salary < min){
+			min = empldatabase[i].salary;
+		}
+	}
+
+	return min;
+}
+
+/*
+ * maxSal() returns the maximum salary out of all the employees within the
+ * specified paramter database
+ * @param: empl *empldatabase, the specific employee databse
+ * @param: int size, the count of employees within specified database
+ * @return int, returns the biggest salary out of all of the employees or zero if 
+ * unassigned
+ */
+int maxSal(empl *empldatabase, int size){
+	int max = 0; 
+	for(int i = 0; i < size; i++){
+		if(empldatabase[i].salary >= max){
+			max = empldatabase[i].salary;
+		}
+	}
+	
+	//eror checking
+	if(max == 0){
+		printf("maxSal(): max is 0\n");
+	}
+
+	return max;
 }
 

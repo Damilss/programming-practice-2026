@@ -5,11 +5,12 @@ The databse should be in the form of an array that should be able to hold 10
 employees. The employee data should be stored in a struct datatype. You should
 store the employee name and their salary. Your program should have the 7 following
 functions. 
-- `int main(int argc, char* argv[])` -> the program entry point
-- `double avrgSal(struct Employee* emloyArr, int size);` -> returns the average salaray
-- `int minSal( struct employee* employArr, int size);` -> returns lowest saalary
-- `int maxSal(struct employee* employArr, int size);` -> returns the highest salary
-- `void printEmployees( struct Employee* employArr, int size);` -> prints data rom databse on the screen
+
+- `int main(int argc, char *argv[])` -> the program entry point
+- `double avrgSal(empl *database, int size);` -> returns the average salaray
+- `int minSal(empl *database, int size);` -> returns lowest saalary
+- `int maxSal(empl *database, int size);` -> returns the highest salary
+- `void printEmployees( empl *database, int size);` -> prints data rom databse on the screen
 
 In your main function, you should declare and allocate space for the databse.
 Then create 4 employees and initialize their names and their salary using random
