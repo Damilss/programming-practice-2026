@@ -10,5 +10,17 @@ In this commit, the teaver makes us allocate space twice for our `struct Employe
 Granted I follow along because it was apart of the instruction, But my next commit
 shall be to optimize this code. 
 
-### 
+### 187ea45 refactor: main.c, refactors teachers example and finish assignment
+
+refactored code, as well as added verbose inline documentation, Topics learned:
+
+- string literals
+- pointer decay
+- enums 
+- preprocessor directives
+- folding constants
+- pointer arithmetic
+- pointer to struct attributes using `->`
+- discarding qualifiers through having different variables access the same string literal
+    - EX: assigning a `const char *` to a `char *`. which makes it modifiable
 
