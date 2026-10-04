@@ -18,6 +18,7 @@ typedef struct {
 
 /*
  * initArray() initializes an array instance
+ * Remember that the caller of this function has to check (*(intArr.arr) != NUL)
  * @return: intArr, the given array that was intialized
  */ 
 intArr initArr(void);
@@ -27,7 +28,7 @@ intArr initArr(void);
  * @param: intArr *arr, the specified array to be deleted
  * @return: void
  */
-void destroyArray(intArr *arr);
+void destroyArr(intArr *arr);
 
 /*
  * appendItem() appends a number to the end of an intArr

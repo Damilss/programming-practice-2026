@@ -8,6 +8,7 @@
  * dynamic arraylist data structure practice in C
  */
 
+// Remember that caller has to make sure (*(intArr.arr) != NULL)
 intArr initArr(void){
 	int *new_arr = calloc(10, sizeof(int));
 	int new_capacity = 10;
@@ -20,7 +21,7 @@ intArr initArr(void){
 	};
 }
 
-void destroyArray(intArr *arr){
+void destroyArr(intArr *arr){
 	free (arr->arr);
 
 	arr->arr = NULL;
