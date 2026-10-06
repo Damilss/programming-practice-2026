@@ -23,3 +23,27 @@ arr[i] = *(arr + i)
 and using something like the `[ ]` automatically derefences the pointer which is
 a lot easier to read then having to do something like `*(arr + i)`
 
+### oct 8, 12:00AM
+
+I found the difference between
+```c
+intArr initArr(void){
+	int *new_arr = calloc(10, sizeof(int));	
+
+	return (intArr){
+		.arr = new_arr,
+		.capacity = 10,
+		.size = 0
+	};
+}
+```
+ and the difference between initaiting without a function:
+ ```c
+ intArr *result = &(intArr){
+		.arr = calloc(10, sizeof(int)),
+		.capacity = 10,
+		.size = 0
+	};
+```
+---
+int test_dynamicarray.c, (WIP)
