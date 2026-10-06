@@ -1,8 +1,4 @@
-#include "test_dynamicarray.h"
-
-
 #include "dynamicarray.h"
-
 #include <stdio.h>
 #include <assert.h>
 
@@ -11,6 +7,9 @@
  * test_dynamicarray.c has unit test functions for the file dynamicarray.c
  * This file should have 100% coverage for dynamicarray.c
  * This file also includes it's own main
+ *
+ * Most of these functions don't need to be pointers since the the intArrs 
+ * don't live beyond the functions that initialize them
  */
 
 /*
@@ -26,7 +25,7 @@ int main (int argc, char *argv[]){
 	printf("Now running test_dynamicarray.c\n");
 
 	printf("test_initArr_1()\n");
-	test_initArr_1(&assertion_count); test_count++;
+	test_initArr_1(assertion_count); test_count++;
 
 	printf("test_initArr_2()\n");
 	test_initArr_2(&assertion_count); test_count++;
@@ -56,7 +55,7 @@ int main (int argc, char *argv[]){
 	test_removeItem_normal(&assertion_count); test_count++;
 	
 	printf("%d tests ran\n", test_count);
-	printf("%d assertions ran \n", *assertion_count);
+	printf("%d assertions ran \n", assertion_count);
 
 
 	return 0;
@@ -68,36 +67,41 @@ int main (int argc, char *argv[]){
  * @param: int &assertion_count, takes the address of a counter to increment
  * @return: void
  */
-static void test_initArr_1 (int &asertion_count) {	
+static void test_initArr_1 (int *assertion_count) {	
 	intArr result = initArr();
 
 	intArr expected;
 	expected.arr = calloc(10, sizeof(int));
-	expcted.capacity = 10;
+	expected.capacity = 10;
 	expected.size = 0;	
 
 	if (expected.arr == NULL){
 		printf("test_initArr_1(): test invalid, expected arr pointed is NULL\n");
-		assert (expected.arr != NULL);	
+		assert (expected.arr != NULL); *assertion_count++;
 		return;
 	}
 	
 	printf("test_initArr_1(): asserting result.arr != NULL\n");
-	assert (result.arr != NULL);
+	assert (result.arr != NULL); assertion_count++;
 
 	printf("test_initArr_1(): asserting result.arr != NULL\n");
-	assert (result.capacity = 10);
+	assert (result.capacity = 10); assertion_count++;
 
 	for (int i = 0; i < result.capacity; i++){
 		printf("test_initArr_1(): asserting result.arr index %d intialized to 0\n", i);
-		assert (result.arr[i] == 0);
+		assert (result.arr[i] == 0); assertion_count++;
 	}
 	
 	printf("test_initArr_1(): asserting result.size == 0\n");
-	assert (result.size == expected.size);
-
-	destroyArr(expected);
-	destoryArr(result);
+	assert (result.size == expected.size); assertion_count++; 
+	
+	/*
+	 * instead of using destoryArr(), keeping function testing independent
+	 * If destroyArr(); doesn't work, doesn't cause memory leak
+	 * structs get automatally forgotten after test ends
+	 */	
+	free(expected.arr); 
+	free(result.arr);
 }
 
 /*
@@ -106,57 +110,134 @@ static void test_initArr_1 (int &asertion_count) {
  * @param: int &assertion_count, takes address of a counter to increment
  * @return: void
  */
-static void test_initArr_2 (int &assertion_count) {
+static void test_initArr_2 (int *assertion_count) {
 	
 	intArr result = initArr();
 	
 	intArr expected;
 	expected.arr = calloc (10,sizeof(int));
 	expected.capacity = 10;
+	expected.size = 0;
 
-	if expected.arr == NULL){
-		printf("test_initArr_1: test invalid, expewcted arr pointed is NULL");
+	if (expected.arr == NULL){
+		printf("test_initArr_1: test invalid, expected arr pointed is NULL");
 	
-		assert (expected.arr != NULL);
+		assert (expected.arr != NULL); assertion_count++;
 		return;
 	}
 	printf ("test_initArr_2(): asserting result.arr != NULL\n");
-	assert (result.arr != NULL);
+	assert (result.arr != NULL); assertion_count++;
 
-	printf ("test_initArr_2(): asserting result.capacity == 10\n");
-	assert (result.capacity == expected.capcity);
+	printf ("test_initArr_2(): asserting result.capacity == expected.capacity\n");
+	assert (result.capacity == expected.capacity); assertion_count++;
 
-	printf ("test_initArr_2(): asserting result.size == 0\n");
-	assert (result.capacity == expected.capacity);
-	
-	
+	printf ("test_initArr_2(): asserting result.size == expected.size\n");
+	assert (result.capacity == expected.capacity); assertion_count++;
 
+	/*
+	 * instead of using destroyArr(), keeping function testing independent
+	 * If destroyArr(); doesn't work, doesn't cause memory leak
+	 * structs get automatally forgotten after test ends
+	 */	
+	free(expected.arr);
+	free(result.arr);	
 }
 
 /*
  * test_destroyArray_1() first unit test of destroyArr()
+ * @param: int &assertion_count, takes address of a counter to increment
  * @return: void
  */
-static void test_destoryArr_1 (int &assertion_count) {
+static void test_destoryArr_1 (int *assertion_count) {
+
+	// essentially initArr(); but don't use initArr() for test of 
+	// other functions
+	intArr *result = &(intArr){
+		.arr = calloc(10, sizeof(int)),
+		.capacity = 10,
+		.size = 0
+	};
 
 
+	intArr expected = (intArr){
+		.arr = NULL,
+		.capacity = -1,
+		.size= -1,
+	};
+	
+	destroyArr(result);
+
+	printf("test_destroyArr_1(): asserting result->size == expected.size");
+	assert(result->size == expected.size); assertion_count++;
+
+	printf ("test_destroyArr_1(): asserting result->capacity == expected.capacity");
+	assert (result->capacity == expected.capacity); assertion_count++;
+
+	printf ("test_destroyArr_1(): asserting result->arr == expected.arr");
+	assert (result->arr == expected.arr); assertion_count++;	
+	
+	//in case that destroyArr() fails
+	if (result->arr != NULL){
+		free(result->arr);
+		result->arr = NULL; 
+	}
 }
 
 /*
  * test_destroyarr_2() second unit test of destroyArr()
+ * @param: int &assertion_count, takes address of a counter to increment
  * @return: void
  */
-static void test_destroyArr_2 (&assertion_count) {
+static void test_destroyArr_2 (int *assertion_count) {
+	// essentially initArr(); but don't use initArr() for test of
+	// other functions
+	intArr *result = &(intArr){
+		.arr = calloc(10, sizeof(int)),
+		.capacity = 10,
+		.size = 0
+	};
+	
+	intArr expected = (intArr){
+		.arr = NULL,
+		.capacity = -1,
+		.size = -1
+	};
 
+	destroyArr(result);
 
+	printf("test_destroyArr_2(): asserting result->size == expected.size");
+	assert (result->size == expected.size); assertion_count++;
+
+	printf ("test_destoryArr_2(): asserting result->capacity == expected.capacity");
+	assert (result->capacity == expected.capacity); assertion_count++;
+
+	printf("test_destroyArr_2(): asserting result->arr = expected.arr");
+	assert(result->arr = expected.arr); assertion_count++;
+
+	if (result->arr != NULL){
+		free(result->arr);
+		result->arr = NULL;
+	}
 }
+
+	
 
 
 /*
  * test_appendItem_normal() is the intended runthrough of appendItem()
+ * @param: int &assertion_count, takes address of a counter to increment 
  * @return: void
  */
-static void test_appendItem_normal (&assertion_count) {
+static void test_appendItem_normal (int *assertion_count) {
+	intArr *result = &(intArr){
+		.arr = calloc(10, sizeof(int)),
+		.capacity = 10,
+		.size = 0
+	};
+
+	appendItem(result, 4);
+
+	printf("");
 
 
 }
@@ -165,9 +246,10 @@ static void test_appendItem_normal (&assertion_count) {
  * test_appendItem_size_eq_capacity()
  * This test runs through the case where capcity is full and arrray needs to
  * be resized
+ * @param: int &assertion_count, takes address of a counter to increment
  * @return: void
  */
-static void test_appendItem_size_eq_capacity (&assertion_count) {
+static void test_appendItem_size_eq_capacity (int *assertion_count) {
 
 
 }
@@ -175,9 +257,10 @@ static void test_appendItem_size_eq_capacity (&assertion_count) {
 /* test_appendItem_size_gr_capacity()
  * This test runs through where the capacity is full and array need sot be 
  * resized, but size greater than capacity
+ * @param: int &assertion_count, takes address of a counter to increment
  * @return: void
  */
-static void test_appendITem_size_gr_capacity (&assertion_count) {
+static void test_appendITem_size_gr_capacity (int *assertion_count) {
 
 
 }
@@ -186,7 +269,7 @@ static void test_appendITem_size_gr_capacity (&assertion_count) {
  * test_setItem_normal() unit tset of intended run through of setItem()
  * @return: void
  */
-static void test_setItem_normal (&assertion_count) { 
+static void test_setItem_normal (int *assertion_count) { 
 
 
 
@@ -197,7 +280,7 @@ static void test_setItem_normal (&assertion_count) {
  * unit test testing where the set idx is bigger 
  * @return: void
  */
-static void test_setItem_set_idx_bigger (void) { 
+static void test_setItem_set_idx_bigger (int *assertion_count) { 
 
 
 
@@ -208,8 +291,15 @@ static void test_setItem_set_idx_bigger (void) {
  * unit test of intended runthrough
  * @return: void
  */
-static void test_removeItem_normal (void) {
+static void test_removeItem_normal (int *assertion_count) {
 
 
 }
 
+/*
+ * test_length_1(), tests lenght function
+ * @param: int &assertion_count,
+ */
+static void test_length_1(int *assertion_count){
+	
+}
