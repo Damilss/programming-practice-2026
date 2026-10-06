@@ -10,21 +10,19 @@
 
 // Remember that caller has to make sure (*(intArr.arr) != NULL)
 intArr initArr(void){
-	int *new_arr = calloc(10, sizeof(int));
-	int new_capacity = 10;
-	int new_size = 0; 
+	int *new_arr = calloc(10, sizeof(int));	
 
 	return (intArr){
 		.arr = new_arr,
-		.capacity = new_capacity,
-		.size = new_size
+		.capacity = 10,
+		.size = 0
 	};
 }
 
 void destroyArr(intArr *arr){
 	free (arr->arr);
 
-	arr->arr = NULL;
+	arr->arr= NULL;
 	arr->capacity = -1;
 	arr->size = -1;
 }
@@ -51,9 +49,10 @@ int appendItem(intArr *arr, int item){
 		arr->capacity = new_capacity;
 	}
 
-	// increment and appendItem	
+	// increment and appendItem (arr->size)-2 to account for the
+	// incrementing up and for the 0th indexing in the array.
 	arr->size++;
-	(arr->arr)[(arr->size) - 1] = item;	
+	(arr->arr)[(arr->size) - 2] = item;	
 
 	return 0;
 }
