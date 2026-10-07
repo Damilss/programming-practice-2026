@@ -42,31 +42,40 @@ int main (int argc, char *argv[]){
 	printf("Now running test_dynamicarray.c\n");
 
 	printf("test_initArr_1()\n");
-	test_initArr_1(&assertion_count); test_count++;
+	test_initArr_1(&assertion_count); 
+	test_count++;
 
 	printf("test_initArr_2()\n");
-	test_initArr_2(&assertion_count); test_count++;
+	test_initArr_2(&assertion_count);
+       	test_count++;
 
 	printf("test_destroyArr_1()\n");
-	test_destroyArr_1(&assertion_count); test_count++;
+	test_destroyArr_1(&assertion_count); 
+	test_count++;
 
 	printf("test_destroyArr_2()\n");
-	test_destroyArr_2(&assertion_count); test_count++;
+	test_destroyArr_2(&assertion_count); 
+	test_count++;
 
 	printf("test_appendItem_normal()\n");
-	test_appendItem_normal(&assertion_count); test_count++;
+	test_appendItem_normal(&assertion_count); 
+	test_count++;
 
 	printf("test_appendItem_size_eq_capacity()\n");
-	test_appendItem_size_eq_capacity(&assertion_count); test_count++;
+	test_appendItem_size_eq_capacity(&assertion_count); 
+	test_count++;
 	
 	printf("test_setItem_normal\n");
-	test_setItem_normal(&assertion_count); test_count++;
+	test_setItem_normal(&assertion_count); 
+	test_count++;
 
 	printf("test_setItem_set_idx_bigger()\n");
-	test_setItem_set_idx_eq(&assertion_count); test_count++;
+	test_setItem_set_idx_eq(&assertion_count); 
+	test_count++;
 
 	printf("test_setItem_set_idx_bigger()\n");
-	test_removeItem_normal(&assertion_count); test_count++;
+	test_removeItem_normal(&assertion_count); 
+	test_count++;
 	
 	printf("%d tests ran\n", test_count);
 	printf("%d assertions ran \n", assertion_count);
@@ -92,23 +101,28 @@ void test_initArr_1 (int *assertion_count) {
 
 	if (expected.arr == NULL){
 		printf("test_initArr_1(): test invalid, expected arr pointed is NULL\n");
-		assert (expected.arr != NULL); (*assertion_count)++;
+		assert (expected.arr != NULL); 
+		(*assertion_count)++;
 		return;
 	}
 	
 	printf("test_initArr_1(): asserting result.arr != NULL\n");
-	assert (result.arr != NULL); (*assertion_count)++;
+	assert (result.arr != NULL); 
+	(*assertion_count)++;
 
 	printf("test_initArr_1(): asserting result.arr != NULL\n");
-	assert (result.capacity = 10); (*assertion_count)++;
+	assert (result.capacity = 10); 
+	(*assertion_count)++;
 
 	for (int i = 0; i < result.capacity; i++){
 		printf("test_initArr_1(): asserting result.arr index %d intialized to 0\n", i);
-		assert (result.arr[i] == 0); (*assertion_count)++;
+		assert (result.arr[i] == 0); 
+		(*assertion_count)++;
 	}
 	
 	printf("test_initArr_1(): asserting result.size == 0\n");
-	assert (result.size == expected.size); (*assertion_count)++; 
+	assert (result.size == expected.size); 
+	(*assertion_count)++; 
 	
 	/*
 	 * instead of using destoryArr(), keeping function testing independent
@@ -137,17 +151,21 @@ void test_initArr_2 (int *assertion_count) {
 	if (expected.arr == NULL){
 		printf("test_initArr_1: test invalid, expected arr pointed is NULL");
 	
-		assert (expected.arr != NULL); (*assertion_count)++;
+		assert (expected.arr != NULL); 
+		(*assertion_count)++;
 		return;
 	}
 	printf ("test_initArr_2(): asserting result.arr != NULL\n");
-	assert (result.arr != NULL); (*assertion_count)++;
+	assert (result.arr != NULL); 
+	(*assertion_count)++;
 
 	printf ("test_initArr_2(): asserting result.capacity == expected.capacity\n");
-	assert (result.capacity == expected.capacity); (*assertion_count)++;
+	assert (result.capacity == expected.capacity); 
+	(*assertion_count)++;
 
 	printf ("test_initArr_2(): asserting result.size == expected.size\n");
-	assert (result.capacity == expected.capacity); (*assertion_count)++;
+	assert (result.capacity == expected.capacity); 
+	(*assertion_count)++;
 
 	/*
 	 * instead of using destroyArr(), keeping function testing independent
@@ -183,13 +201,16 @@ void test_destoryArr_1 (int *assertion_count) {
 	destroyArr(result);
 
 	printf("test_destroyArr_1(): asserting result->size == expected.size\n");
-	assert(result->size == expected.size); (*assertion_count)++;
+	assert(result->size == expected.size); 
+	(*assertion_count)++;
 
 	printf ("test_destroyArr_1(): asserting result->capacity == expected.capacity\n");
-	assert (result->capacity == expected.capacity); (*assertion_count)++;
+	assert (result->capacity == expected.capacity); 
+	(*assertion_count)++;
 
 	printf ("test_destroyArr_1(): asserting result->arr == expected.arr\n");
-	assert (result->arr == expected.arr); (*assertion_count)++;	
+	assert (result->arr == expected.arr); 
+	(*assertion_count)++;	
 	
 	//in case that destroyArr() fails
 	if (result->arr != NULL){
@@ -221,18 +242,20 @@ void test_destroyArr_2 (int *assertion_count) {
 	destroyArr(result);
 
 	printf("test_destroyArr_2(): asserting result->size == expected.size\n");
-	assert (result->size == expected.size); (*assertion_count)++;
+	assert (result->size == expected.size); 
+	(*assertion_count)++;
 
 	printf ("test_destoryArr_2(): asserting result->capacity == expected.capacity\n");
-	assert (result->capacity == expected.capacity); (*assertion_count)++;
+	assert (result->capacity == expected.capacity); 
+	(*assertion_count)++;
 
 	printf("test_destroyArr_2(): asserting result->arr = expected.arr\n");
-	assert(result->arr = expected.arr); (*assertion_count)++;
+	assert(result->arr = expected.arr); 
+	(*assertion_count)++;
 
-	if (result->arr != NULL){
-		free(result->arr);
-		result->arr = NULL;
-	}
+	free(result->arr);
+	result->arr = NULL;
+	
 }
 
 	
@@ -263,20 +286,23 @@ void test_appendItem_normal (int *assertion_count) {
 		printf("test_appendItem_normal(): expected.arr == NULL, Aborting unit tests\n");
 
 	} else {
-		expected.arr[0] = 4; expected.size++; 
+		expected.arr[0] = 4; 
+		expected.size++; 
+
 		appendItem(result, 4);
 
 		// important to differentiate the pointer->struct values opposed to the regular struct
 		printf("test_appendItem_normal(): asserting result->arr[0] == expected.arr[0]\n");
 		assert(result->arr[0] == expected.arr[0]);
-
+		(*assertion_count)++;
 
 		printf("test_appendItem_normal(): asserting result->size == expected.size\n");
 		assert(result->size == expected.size);
+		(*assertion_count)++;
 
 		printf("test_appendItem_normal(): asserting result->capacity == expected.capacity\n");
 		assert(result->capacity == expected.capacity);
-
+		(*assertion_count)++;
 	}
 
 	free(expected.arr);
@@ -319,26 +345,34 @@ void test_appendItem_size_eq_capacity (int *assertion_count) {
 	// using rand to generate numbers	
 	if(result->capacity == INITIAL_EXPECTED_CAPACITY && result->arr != NULL && expected.arr != NULL){
 		for(int i = 0; i < INITIAL_EXPECTED_CAPACITY; i++){
-			result->arr[i] = rand() % 100; result->size++; 
+			result->arr[i] = rand() % 100; 
+			result->size++; 
 			
-			expected.arr[i] = rand() % 100; expected.size++;				
+			expected.arr[i] = rand() % 100; 
+			expected.size++;				
 		}
 			
 		appendItem(result, TEST_VALUE);	
-		expected.arr[10] = TEST_VALUE; expected.size++;
+		expected.arr[10] = TEST_VALUE; 
+		expected.size++;
 
 		printf("test_appendItem_size_eq_capacity(): asserting result->size == expected.size\n");
-		assert(result->size == expected.size); (*assertion_count)++;
+		assert(result->size == expected.size); 
+		(*assertion_count)++;
 		
 		// result->capacity should double and equal expected.capacity (20)
 		printf("test_appendItem_size_eq_capacity(): asserting result->capacity == expected.capacity\n");
-		assert(result->capacity == expected.capacity); (*assertion_count)++;
+		assert(result->capacity == expected.capacity); 
+		(*assertion_count)++;
 		
 		// both should equal TEST_VALUE
 		printf("test_appendItem_size_eq_capacity(): asserting result->arr[11] == expected.arr[11] && \
 				result->arr == TEST_VALUE\n");
-		assert(result->arr[10] == expected.arr[10]); (*assertion_count)++;
-		assert(result->arr[10] == TEST_VALUE); (*assertion_count)++;
+		assert(result->arr[10] == expected.arr[10]); 
+		(*assertion_count)++;
+
+		assert(result->arr[10] == TEST_VALUE); 
+		(*assertion_count)++;
 		
 
 	} else if (result->arr == NULL){
@@ -391,8 +425,11 @@ void test_setItem_normal (int *assertion_count) {
 
 	}else {	
 		for(int i = 0; i < SET_ARR_SIZE; i++){
-			result->arr[i] = rand() % 100; result->size++; 
-			expected.arr[i] = rand() % 100; result->size++;
+			result->arr[i] = rand() % 100; 
+			result->size++; 
+
+			expected.arr[i] = rand() % 100; 
+			result->size++;
 
 		}
 
@@ -401,15 +438,18 @@ void test_setItem_normal (int *assertion_count) {
 	
 		printf("test_setItem_normal(): asserting \
 			expected.arr[SELECTED_IDX] == result->arr[SELECTED_IDX]\n");
-		assert(result->arr[SELECTED_IDX] == expected.arr[SELECTED_IDX]); (*assertion_count)++;
+		assert(result->arr[SELECTED_IDX] == expected.arr[SELECTED_IDX]); 
+		(*assertion_count)++;
 
 		printf("test_setItem_normal(): asserting \
 			result->capacity == expected.capacity\n");
-		assert(result->capacity == expected.capacity);(*assertion_count)++;
+		assert(result->capacity == expected.capacity);
+		(*assertion_count)++;
 
 		printf("test_setItem_normal(): asserting \
 			result->size == expected.size\n");
-		assert(result->size == expected.size);(*assertion_count)++;
+		assert(result->size == expected.size);
+		(*assertion_count)++;
 
 	}
 
