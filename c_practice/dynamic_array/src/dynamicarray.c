@@ -10,12 +10,12 @@
 
 // Remember that caller has to make sure (*(intArr.arr) != NULL)
 intArr initArr(void){
-	int *new_arr = calloc(10, sizeof(int));	
+	int *new_arr = calloc(10, sizeof(*new_arr));	
 
 	return (intArr){
 		.arr = new_arr,
 		.capacity = 10,
-		.size = 0
+		.size = 0,
 	};
 }
 

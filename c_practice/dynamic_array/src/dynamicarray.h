@@ -14,7 +14,7 @@ typedef struct {
 	int *arr;
 	int capacity;
 	int size;
-}intArr;
+} intArr;
 
 /*
  * initArray() initializes an array instance
