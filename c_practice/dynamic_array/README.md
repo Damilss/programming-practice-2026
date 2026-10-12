@@ -8,6 +8,7 @@ This project include dynamic array practice
 .
 ├── docs
 │   └── notes.md
+├── compile_flags.txt
 ├── README.md
 └── src
     ├── dynamicarray.c
@@ -16,4 +17,8 @@ This project include dynamic array practice
 
 3 directories, 5 files
 ```
+
+### test_dynamicarray.c
+
+if tests are failing, there should be an `assertion_failed...`
 
