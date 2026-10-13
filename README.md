@@ -6,11 +6,11 @@ My personal practice repository for 2026.  solutions to programming problems, ex
 
 ### repo structure
 
-```bash
+```sh
 /programming-practice-2026
 ├── august
 │   └── 2904-Shortest-and-Lexicographically-Smallest-Beautiful-String
-│       ├── problem.md
+│       ├── PROBLEM.md
 │       ├── response
 │       │   ├── notes.md
 │       │   ├── reflection.md
@@ -23,6 +23,27 @@ My personal practice repository for 2026.  solutions to programming problems, ex
 │       ├── lineinfo.sh
 │       ├── reflection.md
 │       └── testfile
+├── c_practice
+│   ├── calloc_check
+│   │   └── src
+│   │       └── main.c
+│   ├── compile_flags.txt
+│   ├── dynamic_array
+│   │   ├── compile_flags.txt
+│   │   ├── docs
+│   │   │   └── notes.md
+│   │   ├── README.md
+│   │   └── src
+│   │       ├── dynamicarray.c
+│   │       ├── dynamicarray.h
+│   │       └── test_dynamicarray.c
+│   ├── fib
+│   │   └── src
+│   │       ├── main.c
+│   │       └── out
+│   ├── helloworld.c
+│   ├── name.c
+│   └── sum.c
 ├── cpp_practice
 │   ├── greeter
 │   │   └── src
@@ -37,54 +58,27 @@ My personal practice repository for 2026.  solutions to programming problems, ex
 │   ├── temp_converter
 │   │   └── src
 │   │       └── main.cpp
-│   └── w3schools
-│       ├── calc_total_cost_of_item
-│       │   └── src
-│       │       ├── main.cc
-│       │       └── program
-│       ├── create_student_report_card
-│       │   └── src
-│       │       ├── main.cc
-│       │       └── program
-│       ├── drone_pos_calculator
-│       │   └── src
-│       │       └── main.cc
-│       └── print_name_and_age
-│           └── src
-│               ├── a.out
-│               └── main.cpp
-├── c_practice
-│   ├── dynamic_array
-│   │   ├── docs
-│   │   │   └── notes.md
-│   │   ├── README.md
-│   │   └── src
-│   │       ├── arraytest.c
-│   │       ├── arraytest.h
-│   │       ├── dynamicarray.c
-│   │       └── dynamicarray.h
-│   ├── helloworld.c
-│   ├── name.c
-│   └── sum.c
-├── csc2050-W5_A2
-│   └── src
-│       └── arrayStats.c
-├── csc2050-w6_a1
-│   ├── README.md
-│   └── src
-│       ├── main.c
-│       └── out
-├── csc2050-w6_a2
-│   ├── docs
-│   │   ├── leak-check.md
-│   │   └── notes.md
-│   ├── README.md
-│   └── src
-│       └── main.c
+│   ├── w3schools
+│   │   ├── calc_total_cost_of_item
+│   │   │   └── src
+│   │   │       ├── main.cc
+│   │   │       └── program
+│   │   ├── create_student_report_card
+│   │   │   └── src
+│   │   │       ├── main.cc
+│   │   │       └── program
+│   │   ├── drone_pos_calculator
+│   │   │   └── src
+│   │   │       └── main.cc
+│   │   └── print_name_and_age
+│   │       └── src
+│   │           ├── a.out
+│   │           └── main.cpp
+│   └── word_frequency_counter
+│       └── src
 ├── LICENSE
-├── readme.md
 └── README.md
 
-34 directories, 43 files
+33 directories, 38 files
 ```
 
